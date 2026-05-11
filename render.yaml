@@ -49,8 +49,3 @@ services:
       # Database
       - key: DATABASE_URL
         sync: false
-
-    disk:
-      name: openclaw-data
-      mountPath: /data
-      sizeGB: 1
