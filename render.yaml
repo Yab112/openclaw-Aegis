@@ -1,0 +1,56 @@
+services:
+  - type: web
+    name: openclaw
+    runtime: docker
+
+    plan: free
+
+    healthCheckPath: /health
+
+    envVars:
+      # Render networking
+      - key: PORT
+        value: "10000"
+
+      - key: OPENCLAW_GATEWAY_PORT
+        value: "10000"
+
+      - key: OPENCLAW_GATEWAY_BIND
+        value: "0.0.0.0"
+
+      # Memory optimization for free tier
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=1536"
+
+      # Storage
+      - key: OPENCLAW_STATE_DIR
+        value: /data/.openclaw
+
+      - key: OPENCLAW_WORKSPACE_DIR
+        value: /data/workspace
+
+      # Authentication
+      - key: OPENCLAW_AUTH_CHOICE
+        value: "apiKey"
+
+      - key: OPENCLAW_GATEWAY_TOKEN
+        sync: false
+
+      # AI Provider
+      - key: OPENCLAW_TOKEN_PROVIDER
+        value: "google"
+
+      - key: OPENCLAW_PRIMARY_MODEL
+        value: "gemini-3.1-flash-lite-preview"
+
+      - key: GEMINI_API_KEY
+        sync: false
+
+      # Database
+      - key: DATABASE_URL
+        sync: false
+
+    disk:
+      name: openclaw-data
+      mountPath: /data
+      sizeGB: 1
