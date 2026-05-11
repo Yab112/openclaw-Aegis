@@ -24,10 +24,10 @@ services:
 
       # Storage
       - key: OPENCLAW_STATE_DIR
-        value: /data/.openclaw
+        value: /tmp/.openclaw
 
       - key: OPENCLAW_WORKSPACE_DIR
-        value: /data/workspace
+        value: /tmp/workspace
 
       # Authentication
       - key: OPENCLAW_AUTH_CHOICE
